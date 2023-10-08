@@ -1,7 +1,6 @@
 package com.example.logbook2;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,13 +8,6 @@ import android.widget.ImageView;
 public class MainActivity extends AppCompatActivity {
 
     ImageView imageView;
-    private int[] imageIds = {
-            R.drawable.image1,
-            R.drawable.image2,
-            R.drawable.image3
-    };
-
-    //image1
     private int currentImageIndex = 0;
 
     @Override
@@ -26,24 +18,40 @@ public class MainActivity extends AppCompatActivity {
         imageView = findViewById(R.id.imageView);
         showImage(currentImageIndex);
     }
+
     public void showPreviousImage(View view) {
         currentImageIndex--;
-        if (currentImageIndex <= -1) {
-            currentImageIndex = imageIds.length -1;
+        if (currentImageIndex < 0)
+        {
+            currentImageIndex = 2;
         }
         showImage(currentImageIndex);
     }
 
     public void showNextImage(View view) {
         currentImageIndex++;
-        if (currentImageIndex >= imageIds.length) {
+        if (currentImageIndex > 2)
+        {
             currentImageIndex = 0;
         }
         showImage(currentImageIndex);
     }
 
-    private void showImage(int index)
-    {
-        imageView.setImageResource(imageIds[index]);
+    private void showImage(int index) {
+        int resourceId;
+        switch (index) {
+            case 0:
+                resourceId = R.drawable.image1;
+                break;
+            case 1:
+                resourceId = R.drawable.image2;
+                break;
+            case 2:
+                resourceId = R.drawable.image3;
+                break;
+            default:
+                resourceId = R.drawable.image1;
+        }
+        imageView.setImageResource(resourceId);
     }
 }
